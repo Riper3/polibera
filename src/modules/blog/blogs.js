@@ -1,4 +1,5 @@
 import React from 'react';
+import apiGet from '../../functions/apiget';
 
  class Blogs extends React.Component {
   constructor(props) {
@@ -6,31 +7,16 @@ import React from 'react';
     this.state = {
       error: null,
       isLoaded: false,
-      items: []
+      data: []
     };
   }
 
   componentDidMount() {
-    fetch("http://localhost:4000/blog")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            items: result
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      )
+    apiGet(this, 'blog');
   }
 
   render() {
-    const { error, isLoaded, items } = this.state;
+    const { error, isLoaded, data } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -38,9 +24,9 @@ import React from 'react';
     } else {
       return (
         <ul>
-          {items.map(item => (
-            <li key={item.title}>
-              {item.title} {item.description}
+          {data.map(blog => (
+            <li key={blog.title}>
+              {blog.title} {blog.description}
             </li>
           ))}
         </ul>
