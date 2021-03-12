@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Navbar from './modules/share/navbar.js';
 import Footer from './modules/share/footer.js';
 import Blogs from './modules/blog/blogs.js';
+import Blog from './modules/blog/blog.js';
 
 export default function App() {
   return (
@@ -19,6 +20,9 @@ export default function App() {
           <Route path="/categories">
             <Categories />
           </Route>
+          <Route path='/:blog' render={(props) => {
+              return (<Blog {...props } />)
+          }} />
         </Switch>
         <Footer />
     </Router>

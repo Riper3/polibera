@@ -12,7 +12,7 @@ import apiGet from '../../functions/apiget';
   }
 
   componentDidMount() {
-    apiGet(this, 'blog');
+    apiGet(this, 'blog' + this.props.match.url);
   }
 
   render() {
@@ -23,13 +23,7 @@ import apiGet from '../../functions/apiget';
       return <div>Loading...</div>;
     } else {
       return (
-        <ul>
-          {data.map(blog => (
-            <li key={blog.title}>
-              <a href={blog.url}>{blog.title} {blog.description}</a>
-            </li>
-          ))}
-        </ul>
+        <h2>{data.title}</h2>
       );
     }
   }
